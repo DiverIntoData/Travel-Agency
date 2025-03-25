@@ -1,0 +1,8 @@
+streamlit
+openai
+IPython
+selenium
+requests
+pandas
+datetime
+itertools
