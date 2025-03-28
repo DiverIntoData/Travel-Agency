@@ -6,4 +6,4 @@ requests
 pandas
 datetime
 selenium-stealth
-undetected-chromedrive
+undetected-chromedriver
