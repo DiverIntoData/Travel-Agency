@@ -2,39 +2,27 @@ def find_flight_price(flight_origin, flight_destination, departure_date, return_
     import time
     import re
     import random
-    from selenium import webdriver
+    # from selenium import webdriver
     from selenium.webdriver.common.by import By
-    from selenium.webdriver.chrome.service import Service
+    # from selenium.webdriver.chrome.service import Service
     from selenium.webdriver.chrome.options import Options
-    from webdriver_manager.chrome import ChromeDriverManager
+    # from webdriver_manager.chrome import ChromeDriverManager
     from selenium_stealth import stealth
+    import undetected_chromedriver as uc
 
     # Initialize price_number with a default value
     price_number = None
 
     # Set Chrome options for headless mode
     options = Options()
-    options.add_argument("--headless")
-    # options.add_argument("--disable-gpu")
-    # options.add_argument("--no-sandbox")
-    # options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--headless") # Headless is still more likely to be detected, but often necessary on Streamlit Cloud
+    options.add_argument("--no-sandbox") # Often required in container environments
+    options.add_argument("--disable-dev-shm-usage") # Often required in container environments
+    options.add_argument('--disable-gpu') # Sometimes helps in headless
 
-
-
-    # Set a realistic user agent
-    # user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36"
-    # options.add_argument(f'user-agent={user_agent}')
-
-    # Disable automation flags
-    # options.add_argument("--disable-blink-features=AutomationControlled")
-    # options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    # options.add_experimental_option("useAutomationExtension", False)
-
-    # Use webdriver-manager to automatically manage ChromeDriver
-    service = Service(ChromeDriverManager().install())
 
     # Create new instance of Chrome in headless mode
-    browser = webdriver.Chrome(service=service, options=options)
+    browser = uc.Chrome(options=options, use_subprocess=True) # use_subprocess=True can sometimes help in restricted environments like Docker/Streamlit Cloud
 
     stealth(
         browser,
