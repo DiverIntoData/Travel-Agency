@@ -5,3 +5,4 @@ selenium
 requests
 pandas
 datetime
+selenium-stealth
