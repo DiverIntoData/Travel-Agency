@@ -63,7 +63,14 @@ def find_flight_price(flight_origin, flight_destination, departure_date, return_
 
         # Set window size
         browser.set_window_size(1920, 1080)
+############################################################ PROXY #################################################################
+        # Proxy setting (keep as is)
+        options.add_argument("--proxy-server=https://scraperapi.screenshot=true:a9755f0a02aa82bb4eed7c5698527196@proxy-server.scraperapi.com:8001")
 
+        driver = None # Initialize driver to None
+############################################################
+
+        
         # Determine URL
         if return_date is None:
             kayak_url = f"https://www.kayak.es/flights/{flight_origin}-{flight_destination}/{departure_date}?ucs=1993xcp"
